@@ -1,13 +1,10 @@
 package com.example.medical.service;
-
 import com.example.medical.entity.Comment;
 import com.example.medical.entity.Patient;
 import com.example.medical.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PatientService {
@@ -34,8 +31,8 @@ private final PatientRepository patientRepository;
         patientRepository.deleteById(patientid);
     }
 
-    public Long update (Patient patient){
-        return patientRepository.save(patient).getId();
+    public Patient update (Patient patient){
+        return patientRepository.save(patient);
     }
 
     public List<Patient> getByName(String name){
@@ -47,5 +44,14 @@ private final PatientRepository patientRepository;
     public List<Patient> getAll (){
         final List<Patient> patients = patientRepository.findAll();
         return patients;
+    }
+
+    public Object addcomment (Long id, String comment, String dayofediting){
+        Patient patient = getById(id);
+        Comment comments = new Comment(comment, dayofediting);
+        patient.addComment(comments);
+        update(patient);
+
+        return "Success";
     }
 }

@@ -7,7 +7,7 @@ spring:
     properties:
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/medicalcient
+    url: jdbc:postgresql://localhost:5432/medpatient
     username: postgres
     password: 524680
     driver-class-name: org.postgresql.Driver

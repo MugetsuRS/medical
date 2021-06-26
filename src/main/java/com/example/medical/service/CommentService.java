@@ -18,12 +18,12 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public Optional<Comment> getByid(final Long id){
-        return commentRepository.findById(id);
+    public Comment getByid(Long id){
+        return commentRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("Patient with id: " + id + " not found"));
     }
 
-//    public List<Comment> getAll (){
-//        final List<Comment> comments =commentRepository.findAll();
-//        return  comments;
-//    }
+    public Long editcomment (Comment comment){
+        return commentRepository.save(comment).getId();
+    }
 }
