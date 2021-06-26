@@ -1,5 +1,7 @@
 package com.example.medical.entity;
 
+import com.example.medical.entity.dto.CommentRequestDTO;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +13,11 @@ public class Comment {
     private Long id;
     private String comment;
     private String dayofadditing;
+
+    public Comment(CommentRequestDTO commentRequestDTO){
+        comment = commentRequestDTO.getComment();
+        dayofadditing = commentRequestDTO.getDayofadditing();
+    }
 
     public Comment() {
     }
@@ -45,7 +52,7 @@ public class Comment {
     }
 
     @Override
-    public String toString() {
+    public String  toString() {
         return "Comment{" +
                 "id=" + id +
                 ", comment='" + comment + '\'' +

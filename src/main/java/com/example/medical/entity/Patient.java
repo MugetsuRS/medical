@@ -34,6 +34,10 @@ public class Patient {
         this.comments = comments;
     }
 
+    public void addComment (final Comment comment){
+        comments.add(comment);
+    }
+
     public Long getId() {
         return id;
     }
