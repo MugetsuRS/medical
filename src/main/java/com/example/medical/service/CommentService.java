@@ -18,7 +18,7 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public Comment getByid(Long id){
+    public Comment findbyid(Long id){
         return commentRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Patient with id: " + id + " not found"));
     }
