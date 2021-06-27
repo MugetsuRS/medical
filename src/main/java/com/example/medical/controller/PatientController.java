@@ -24,39 +24,45 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping("/{patientId}")
-    public PatientResponceDTO getbyid(@PathVariable Long patientId) {
-        return new PatientResponceDTO(patientService.findbyid(patientId));
+    //working
+    @RequestMapping(value = "/getid/{id}", method = RequestMethod.GET)
+    public PatientResponceDTO getbyid(@PathVariable Long id) {
+        return new PatientResponceDTO(patientService.findbyid(id));
     }
 
-    @DeleteMapping("/delete")
-    public void delete(@RequestParam Long patientId) {
+    @DeleteMapping("/delete/{patientId}")
+    public void delete(@PathVariable Long patientId) {
         patientService.delete(patientId);
     }
 
     @PutMapping("/uptodate")
-    public void uptodate(Patient patient) {
+    public String uptodate(Patient patient) {
         patientService.update(patient);
+        return "Success";
     }
 
+    //working
     @GetMapping("/getall")
     public ResponseEntity<List<Patient>> getAllPateints() {
         final List<Patient> patients = patientService.findall();
         return ResponseEntity.ok(patients);
     }
-
-    @GetMapping("/{name}")
+    //working
+    @GetMapping("/getname/{name}")
     public ResponseEntity<List<Patient>> findbyname(@PathVariable String name) {
         final List<Patient> patients = patientService.findbyname(name);
+//        final List<Patient> patienttest = patients;
+//        System.out.println(patienttest);
+//        System.out.println(patients);
         return ResponseEntity.ok(patients);
     }
-
+    //working
     @PutMapping("/addcomment")
     public void addcomment(@RequestBody AddcommentDTO addcommentDTO) {
         patientService.addcomment(addcommentDTO.getPatientId(), addcommentDTO.getComment(), addcommentDTO.getDayofediting());
     }
-
-    @PostMapping
+    //working
+    @PostMapping("/create")
     public Long create(@RequestBody PatientRequestDTO patientRequestDTO) {
         return patientService.save(patientRequestDTO.getName(), patientRequestDTO.getSurrname(), patientRequestDTO.getDayofbirth(),patientRequestDTO.getCountry(),
                 patientRequestDTO.getState(), patientRequestDTO.getAddress(), patientRequestDTO.getSex(),patientRequestDTO.getComments()
