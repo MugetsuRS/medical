@@ -33,8 +33,8 @@ public class PatientService {
         patientRepository.deleteById(patientid);
     }
 
-    public Patient update(Patient patient) {
-        return patientRepository.save(patient);
+    public Long update(Patient patient) {
+        return patientRepository.save(patient).getId();
     }
 
     public List<Patient> findbyname(String name) {
